@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedInfo Center - Your Trusted Health Resource</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #2563eb;
+        }
+
+        .top-bar {
+            background: #f1f5f9;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-header {
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #2563eb;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: #2563eb;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #1e293b;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .card p {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .card-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Image Placeholders */
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e2e8f0;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: #dbeafe;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            font-size: 24px;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e2e8f0;
+        }
+
+        .news-card .image-placeholder {
+            height: 200px;
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        .news-card-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* Find Doctor Section */
+        .doctor-search {
+            background: #f8fafc;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .doctor-search h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e293b;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #2563eb;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: #64748b;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: #f1f5f9;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 15px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: #60a5fa;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #60a5fa;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 20px;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .tab-nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .tab-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .contact-info {
+                display: none;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 40px 0;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hidden content for tabs */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <div>📞 (555) 123-4567</div>
+                    <div>✉️ info@medicalcenter.com</div>
+                    <div>🚨 24/7 Emergency Line: (555) 911-HELP</div>
+                </div>
+                <div>
+                    <a href="#" style="color: #2563eb; text-decoration: none; margin-right: 20px;">Patient Portal</a>
+                    <a href="#" style="color: #dc2626; text-decoration: none; font-weight: bold;">Emergency</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-header">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="logo">🏥 MedInfo Center</div>
+                    <nav>
+                        <ul class="nav-menu" id="navMenu">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#symptoms">Health Tools</a></li>
+                            <li><a href="#find-doctor">Find a Doctor</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#news">Health News</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Your Trusted Health Information Resource</h1>
+            <p>Get reliable medical information, symptom checker, and health guidance from trusted professionals</p>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search symptoms, conditions, or treatments...">
+                <button class="search-btn">🔍</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Trusted by Millions Worldwide</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>10M+</h3>
+                    <p>Monthly Users</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Medical Experts</p>
+                </div>
+                <div class="stat-item">
+                    <h3>1,000+</h3>
+                    <p>Health Articles</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Support Available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Health Tools Section -->
+            <section class="section" id="symptoms">
+                <h2 class="section-title">Health Tools & Information</h2>
+
+                <div class="tab-nav">
+                    <button class="tab-btn active" onclick="showTab('symptoms-tab')">Symptom Checker</button>
+                    <button class="tab-btn" onclick="showTab('conditions-tab')">Health Conditions</button>
+                    <button class="tab-btn" onclick="showTab('medications-tab')">Medications</button>
+                    <button class="tab-btn" onclick="showTab('wellness-tab')">Wellness Tips</button>
+                </div>
+
+                <!-- Symptoms Tab -->
+                <div id="symptoms-tab" class="tab-content active">
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="image-placeholder">[Headache Symptom Image]</div>
+                            <h3>Headache</h3>
+                            <p>Learn about different types of headaches including tension, migraine, and cluster
+                                headaches. Understand triggers, symptoms, and when to seek medical attention.</p>
+                            <a href="#" class="card-link">Check Symptoms →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Chest Pain Symptom Image]</div>
+                            <h3>Chest Pain</h3>
+                            <p>Understanding chest pain symptoms, potential causes from heart conditions to muscle
+                                strain, and when it requires immediate emergency medical care.</p>
+                            <a href="#" class="card-link">Learn More →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Fever Symptom Image]</div>
+                            <h3>Fever</h3>
+                            <p>Comprehensive information about body temperature changes, fever causes in adults and
+                                children, treatment options, and warning signs.</p>
+                            <a href="#" class="card-link">Check Temperature →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Fatigue Symptom Image]</div>
+                            <h3>Fatigue</h3>
+                            <p>Common causes of persistent fatigue, from sleep disorders to chronic conditions, and when
+                                ongoing tiredness requires medical evaluation.</p>
+                            <a href="#" class="card-link">Assess Fatigue →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Cough Symptom Image]</div>
+                            <h3>Persistent Cough</h3>
+                            <p>Different types of coughs, from dry to productive, potential causes including allergies,
+                                infections, and chronic conditions.</p>
+                            <a href="#" class="card-link">Analyze Cough →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Digestive Symptom Image]</div>
+                            <h3>Digestive Issues</h3>
+                            <p>Understanding stomach pain, nausea, bloating, and other digestive symptoms. Learn about
+                                common gastrointestinal conditions.</p>
+                            <a href="#" class="card-link">Check Symptoms →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conditions Tab -->
+                <div id="conditions-tab" class="tab-content">
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="image-placeholder">[Diabetes Management Image]</div>
+                            <h3>Diabetes</h3>
+                            <p>Comprehensive information about Type 1, Type 2, and gestational diabetes. Learn about
+                                blood sugar management, diet, exercise, and preventing complications.</p>
+                            <a href="#" class="card-link">Manage Diabetes →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Heart Health Image]</div>
+                            <h3>Heart Disease</h3>
+                            <p>Understanding cardiovascular health, coronary artery disease, heart attack prevention,
+                                risk factors, and lifestyle modifications for heart health.</p>
+                            <a href="#" class="card-link">Heart Health →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Blood Pressure Image]</div>
+                            <h3>High Blood Pressure</h3>
+                            <p>Information about hypertension, its silent nature, health effects, lifestyle management,
+                                medication options, and monitoring techniques.</p>
+                            <a href="#" class="card-link">Monitor BP →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Mental Health Image]</div>
+                            <h3>Mental Health</h3>
+                            <p>Resources for understanding anxiety, depression, stress management, therapy options, and
+                                maintaining mental wellness in daily life.</p>
+                            <a href="#" class="card-link">Mental Wellness →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Arthritis Image]</div>
+                            <h3>Arthritis</h3>
+                            <p>Understanding different types of arthritis, joint pain management, inflammation
+                                reduction, exercise recommendations, and treatment options.</p>
+                            <a href="#" class="card-link">Joint Health →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Cancer Prevention Image]</div>
+                            <h3>Cancer Prevention</h3>
+                            <p>Evidence-based information about cancer prevention, early detection, screening
+                                guidelines, and reducing risk factors through lifestyle changes.</p>
+                            <a href="#" class="card-link">Prevention Guide →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medications Tab -->
+                <div id="medications-tab" class="tab-content">
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="image-placeholder">[Drug Interaction Checker Image]</div>
+                            <h3>Drug Interactions</h3>
+                            <p>Advanced tool to check for potential interactions between prescription medications,
+                                over-the-counter drugs, and dietary supplements.</p>
+                            <a href="#" class="card-link">Check Interactions →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Medication Guide Image]</div>
+                            <h3>Medication Guide</h3>
+                            <p>Comprehensive database of prescription and over-the-counter medications with dosage
+                                information, side effects, and usage instructions.</p>
+                            <a href="#" class="card-link">Browse Medications →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Dosage Calculator Image]</div>
+                            <h3>Dosage Calculator</h3>
+                            <p>Safe dosage calculation tools for common medications based on age, weight, and medical
+                                conditions. Always consult healthcare providers.</p>
+                            <a href="#" class="card-link">Calculate Dosage →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Side Effects Image]</div>
+                            <h3>Side Effects Guide</h3>
+                            <p>Understanding common and serious side effects of medications, what to watch for, and when
+                                to contact your healthcare provider.</p>
+                            <a href="#" class="card-link">Learn About Effects →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Generic Drugs Image]</div>
+                            <h3>Generic vs Brand</h3>
+                            <p>Information about generic medications, FDA approval process, cost savings, and
+                                equivalency to brand-name drugs.</p>
+                            <a href="#" class="card-link">Compare Options →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Medication Safety Image]</div>
+                            <h3>Medication Safety</h3>
+                            <p>Best practices for storing medications, understanding expiration dates, proper disposal,
+                                and avoiding medication errors.</p>
+                            <a href="#" class="card-link">Safety Tips →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wellness Tab -->
+                <div id="wellness-tab" class="tab-content">
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="image-placeholder">[Nutrition Guide Image]</div>
+                            <h3>Nutrition & Diet</h3>
+                            <p>Evidence-based nutrition information, healthy eating guidelines, meal planning tips, and
+                                dietary recommendations for various health conditions.</p>
+                            <a href="#" class="card-link">Nutrition Guide →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Exercise Program Image]</div>
+                            <h3>Exercise & Fitness</h3>
+                            <p>Safe exercise routines for different fitness levels, workout plans for chronic
+                                conditions, and physical activity recommendations.</p>
+                            <a href="#" class="card-link">Fitness Plans →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Sleep Health Image]</div>
+                            <h3>Sleep Health</h3>
+                            <p>Understanding sleep cycles, improving sleep quality, managing sleep disorders, and the
+                                importance of rest for overall health.</p>
+                            <a href="#" class="card-link">Sleep Better →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Stress Management Image]</div>
+                            <h3>Stress Management</h3>
+                            <p>Effective techniques for managing daily stress, relaxation methods, mindfulness
+                                practices, and work-life balance strategies.</p>
+                            <a href="#" class="card-link">Reduce Stress →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Preventive Care Image]</div>
+                            <h3>Preventive Care</h3>
+                            <p>Health screening schedules, vaccination guidelines, annual check-up recommendations, and
+                                early detection strategies by age group.</p>
+                            <a href="#" class="card-link">Prevention Schedule →</a>
+                        </div>
+                        <div class="card">
+                            <div class="image-placeholder">[Healthy Aging Image]</div>
+                            <h3>Healthy Aging</h3>
+                            <p>Maintaining health and independence as you age, managing chronic conditions, staying
+                                active, and cognitive health preservation.</p>
+                            <a href="#" class="card-link">Aging Well →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Find Doctor Section -->
+            <section class="section" id="find-doctor">
+                <h2 class="section-title">Find a Healthcare Provider</h2>
+                <div class="doctor-search">
+                    <h3>Search for Doctors, Specialists, and Healthcare Facilities</h3>
+                    <form class="search-form">
+                        <div class="form-group">
+                            <label for="specialty">Specialty</label>
+                            <select id="specialty">
+                                <option value="">Select Specialty</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="dermatology">Dermatology</option>
+                                <option value="endocrinology">Endocrinology</option>
+                                <option value="family-medicine">Family Medicine</option>
+                                <option value="gastroenterology">Gastroenterology</option>
+                                <option value="neurology">Neurology</option>
+                                <option value="oncology">Oncology</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="psychiatry">Psychiatry</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" placeholder="City, State or ZIP">
+                        </div>
+                        <div class="form-group">
+                            <label for="insurance">Insurance</label>
+                            <select id="insurance">
+                                <option value="">Select Insurance</option>
+                                <option value="aetna">Aetna</option>
+                                <option value="blue-cross">Blue Cross Blue Shield</option>
+                                <option value="cigna">Cigna</option>
+                                <option value="humana">Humana</option>
+                                <option value="medicare">Medicare</option>
+                                <option value="unitedhealth">UnitedHealth</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">Search Doctors</button>
+                    </form>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="service-icon">👨‍⚕️</div>
+                        <h3>Primary Care Physicians</h3>
+                        <p>Find family doctors and internists for comprehensive healthcare, routine check-ups, and
+                            ongoing medical care management.</p>
+                        <a href="#" class="card-link">Find Primary Care →</a>
+                    </div>
+                    <div class="card">
+                        <div class="service-icon">🧠</div>
+                        <h3>Specialists</h3>
+                        <p>Connect with medical specialists including cardiologists, neurologists, endocrinologists, and
+                            other expert physicians.</p>
+                        <a href="#" class="card-link">Find Specialists →</a>
+                    </div>
+                    <div class="card">
+                        <div class="service-icon">🏥</div>
+                        <h3>Healthcare Facilities</h3>
+                        <p>Locate hospitals, clinics, urgent care centers, and specialized treatment facilities in your
+                            area.</p>
+                        <a href="#" class="card-link">Find Facilities →</a>
+                    </div>
+                    <div class="card">
+                        <div class="service-icon">💊</div>
+                        <h3>Pharmacies</h3>
+                        <p>Find local pharmacies, compare prescription prices, and locate 24-hour pharmacy services near
+                            you.</p>
+                        <a href="#" class="card-link">Find Pharmacies →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Medical Services Section -->
+            <section class="section" id="services">
+                <h2 class="section-title">Comprehensive Medical Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🏥</div>
+                        <h3>Primary Care</h3>
+                        <p>Comprehensive healthcare services for patients of all ages, including preventive care,
+                            routine checkups, chronic disease management, and health screenings.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">👨‍⚕️</div>
+                        <h3>Specialty Care</h3>
+                        <p>Expert medical care from board-certified specialists in cardiology, neurology, oncology,
+                            orthopedics, and other specialized fields of medicine.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🚑</div>
+                        <h3>Emergency Care</h3>
+                        <p>24/7 emergency medical services for urgent health conditions, trauma care, and
+                            life-threatening medical emergencies with immediate response.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🛡️</div>
+                        <h3>Preventive Care</h3>
+                        <p>Comprehensive health screenings, vaccinations, annual physical exams, and preventive measures
+                            to maintain optimal health and detect issues early.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔬</div>
+                        <h3>Diagnostic Services</h3>
+                        <p>Advanced diagnostic imaging, laboratory testing, pathology services, and specialized testing
+                            to accurately diagnose medical conditions.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">⚕️</div>
+                        <h3>Surgical Services</h3>
+                        <p>State-of-the-art surgical procedures including minimally invasive surgery, outpatient
+                            procedures, and complex surgical interventions.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🩺</div>
+                        <h3>Telemedicine</h3>
+                        <p>Virtual healthcare consultations, remote monitoring, and digital health services for
+                            convenient access to medical care from home.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🧘‍♀️</div>
+                        <h3>Wellness Programs</h3>
+                        <p>Comprehensive wellness and lifestyle programs including nutrition counseling, fitness
+                            programs, and health education services.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Health News Section -->
+            <section class="section" id="news">
+                <h2 class="section-title">Latest Health News & Research</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="image-placeholder">[COVID-19 Update Image]</div>
+                        <div class="news-card-content">
+                            <div class="news-date">December 15, 2024</div>
+                            <h3>Latest COVID-19 Variant Updates</h3>
+                            <p>New research on emerging COVID-19 variants, updated vaccination recommendations, and
+                                current prevention strategies from leading health organizations.</p>
+                            <a href="#" class="card-link">Read Full Article →</a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="image-placeholder">[Heart Research Image]</div>
+                        <div class="news-card-content">
+                            <div class="news-date">December 12, 2024</div>
+                            <h3>Breakthrough in Heart Disease Treatment</h3>
+                            <p>Revolutionary new treatment approach shows promising results in reducing heart disease
+                                risk and improving outcomes for cardiac patients.</p>
+                            <a href="#" class="card-link">Read Full Article →</a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="image-placeholder">[Mental Health Image]</div>
+                        <div class="news-card-content">
+                            <div class="news-date">December 10, 2024</div>
+                            <h3>Mental Health Awareness Month</h3>
+                            <p>New initiatives and resources for mental health support, including expanded telehealth
+                                services and community mental health programs.</p>
+                            <a href="#" class="card-link">Read Full Article →</a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="image-placeholder">[Diabetes Research Image]</div>
+                        <div class="news-card-content">
+                            <div class="news-date">December 8, 2024</div>
+                            <h3>Diabetes Management Innovation</h3>
+                            <p>New technology and treatment methods are revolutionizing diabetes care and helping
+                                patients achieve better blood sugar control.</p>
+                            <a href="#" class="card-link">Read Full Article →</a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="image-placeholder">[Cancer Research Image]</div>
+                        <div class="news-card-content">
+                            <div class="news-date">December 5, 2024</div>
+                            <h3>Cancer Screening Guidelines Updated</h3>
+                            <p>Latest recommendations for cancer screening including new guidelines for breast, colon,
+                                and lung cancer detection and prevention.</p>
+                            <a href="#" class="card-link">Read Full Article →</a>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="image-placeholder">[Vaccine Research Image]</div>
+                        <div class="news-card-content">
+                            <div class="news-date">December 3, 2024</div>
+                            <h3>Vaccine Development Progress</h3>
+                            <p>Updates on new vaccine developments and immunization schedules for children and adults,
+                                including seasonal recommendations.</p>
+                            <a href="#" class="card-link">Read Full Article →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        When should I see a doctor for my symptoms?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        You should see a doctor if you experience persistent symptoms that interfere with daily
+                        activities, symptoms that worsen over time, or any concerning changes in your health. For
+                        emergency symptoms like chest pain, difficulty breathing, severe headache, or signs of stroke,
+                        seek immediate medical attention.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        How often should I have a physical exam?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Adults should have a comprehensive physical exam annually, though frequency may vary based on
+                        age, health status, and risk factors. Your healthcare provider can recommend the appropriate
+                        schedule for your individual health needs and screening requirements.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        What vaccines do adults need?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Adults typically need annual flu vaccines, COVID-19 boosters as recommended, and periodic
+                        vaccines like Tdap (tetanus, diphtheria, pertussis). Additional vaccines may be recommended
+                        based on age, health conditions, travel plans, and occupation. Consult your healthcare provider
+                        for personalized recommendations.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        How can I prepare for a doctor's appointment?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Prepare by listing your symptoms, current medications, questions you want to ask, and bringing
+                        your insurance card and ID. Consider bringing a family member for support, arrive early, and be
+                        ready to discuss your medical history and any concerns you may have.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        What's the difference between urgent care and emergency room?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Urgent care is for non-life-threatening conditions that need prompt attention, like minor
+                        injuries, flu symptoms, or infections. Emergency rooms are for serious, life-threatening
+                        conditions like chest pain, severe injuries, difficulty breathing, or stroke symptoms. Emergency
+                        rooms are typically more expensive and have longer wait times.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter Section -->
+            <section class="newsletter">
+                <div class="container">
+                    <h2 class="section-title">Stay Informed About Your Health</h2>
+                    <p style="margin-bottom: 30px; color: #64748b;">Get the latest health news, tips, and medical
+                        research delivered to your inbox weekly.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn-primary">Subscribe</button>
+                    </form>
+                    <p style="margin-top: 15px; font-size: 14px; color: #64748b;">We respect your privacy. Unsubscribe
+                        at any time.</p>
+                </div>
+            </section>
+
+            <!-- Why Choose Us Section -->
+            <section class="section" id="about">
+                <h2 class="section-title">Why Choose MedInfo Center</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="service-icon">🛡️</div>
+                        <h3>Trusted Medical Information</h3>
+                        <p>All our content is reviewed by licensed medical professionals, board-certified physicians,
+                            and healthcare experts. We follow strict editorial guidelines and update information
+                            regularly with the latest medical research and clinical guidelines.</p>
+                    </div>
+                    <div class="card">
+                        <div class="service-icon">👥</div>
+                        <h3>Expert Medical Team</h3>
+                        <p>Our editorial team consists of board-certified physicians, registered nurses, pharmacists,
+                            and healthcare specialists with decades of combined clinical experience across multiple
+                            medical specialties.</p>
+                    </div>
+                    <div class="card">
+                        <div class="service-icon">🏆</div>
+                        <h3>Award-Winning Platform</h3>
+                        <p>Recognized for excellence in digital health information delivery by leading healthcare
+                            organizations. We've received awards for patient education, medical accuracy, and innovative
+                            health technology solutions.</p>
+                    </div>
+                    <div class="card">
+                        <div class="service-icon">❤️</div>
+                        <h3>Patient-Centered Care</h3>
+                        <p>We prioritize patient education and empowerment, providing clear, understandable health
+                            information that helps you make informed decisions about your healthcare and communicate
+                            effectively with your healthcare providers.</p>
+                    </div>
+                    <div class="card">
+                        <div class="service-icon">🔒</div>
+                        <h3>Privacy & Security</h3>
+                        <p>We maintain the highest standards of data privacy and security, ensuring your personal health
+                            information is protected with advanced encryption and following HIPAA compliance guidelines.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="service-icon">🌐</div>
+                        <h3>Accessible Healthcare</h3>
+                        <p>Our platform is designed to be accessible to all users, with multiple language options,
+                            disability-friendly features, and mobile-optimized content available 24/7 from anywhere.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Medical Information</h4>
+                    <ul>
+                        <li><a href="#">Symptom Checker</a></li>
+                        <li><a href="#">Health Conditions A-Z</a></li>
+                        <li><a href="#">Drug & Medication Database</a></li>
+                        <li><a href="#">Medical Tests & Procedures</a></li>
+                        <li><a href="#">First Aid & Emergency Care</a></li>
+                        <li><a href="#">Medical News & Research</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Healthcare Services</h4>
+                    <ul>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="#">Find a Hospital</a></li>
+                        <li><a href="#">Urgent Care Locations</a></li>
+                        <li><a href="#">Pharmacy Locator</a></li>
+                        <li><a href="#">Telemedicine Services</a></li>
+                        <li><a href="#">Health Insurance Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Wellness Resources</h4>
+                    <ul>
+                        <li><a href="#">Nutrition & Diet Plans</a></li>
+                        <li><a href="#">Exercise & Fitness</a></li>
+                        <li><a href="#">Mental Health Support</a></li>
+                        <li><a href="#">Preventive Care</a></li>
+                        <li><a href="#">Healthy Aging</a></li>
+                        <li><a href="#">Support Groups</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact & Support</h4>
+                    <ul>
+                        <li>📞 General: (555) 123-4567</li>
+                        <li>🚨 Emergency: (555) 911-HELP</li>
+                        <li>✉️ info@medinfocenter.com</li>
+                        <li>📍 123 Medical Center Drive</li>
+                        <li>🏥 Healthcare City, HC 12345</li>
+                        <li>🕒 24/7 Support Available</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MedInfo Center. All rights reserved. | <a href="#" style="color: #60a5fa;">Privacy
+                        Policy</a> | <a href="#" style="color: #60a5fa;">Terms of Service</a> | <a href="#"
+                        style="color: #60a5fa;">Medical Disclaimer</a> | <a href="#"
+                        style="color: #60a5fa;">Accessibility</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', function () {
+            navMenu.classList.toggle('active');
+        });
+
+        // Tab functionality
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // FAQ toggle functionality
+        function toggleFAQ(button) {
+            const answer = button.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+
+            // Close all FAQ answers
+            document.querySelectorAll('.faq-answer').forEach(answer => {
+                answer.classList.remove('active');
+            });
+
+            document.querySelectorAll('.faq-question span').forEach(span => {
+                span.textContent = '+';
+            });
+
+            // Toggle current answer
+            if (!isActive) {
+                answer.classList.add('active');
+                button.querySelector('span').textContent = '-';
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+
+        function performSearch() {
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm) {
+                alert(`Searching for: ${searchTerm}\n\nThis would redirect to search results page with medical information about "${searchTerm}"`);
+                // Here you would implement actual search functionality
+            }
+        }
+
+        searchBtn.addEventListener('click', performSearch);
+
+        searchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Doctor search form
+        document.querySelector('.search-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const specialty = document.getElementById('specialty').value;
+            const location = document.getElementById('location').value;
+            const insurance = document.getElementById('insurance').value;
+
+            let searchCriteria = [];
+            if (specialty) searchCriteria.push(`Specialty: ${specialty}`);
+            if (location) searchCriteria.push(`Location: ${location}`);
+            if (insurance) searchCriteria.push(`Insurance: ${insurance}`);
+
+            if (searchCriteria.length > 0) {
+                alert(`Searching for doctors with:\n${searchCriteria.join('\n')}\n\nThis would redirect to doctor search results.`);
+            } else {
+                alert('Please fill in at least one search criteria.');
+            }
+        });
+
+        // Newsletter subscription
+        document.querySelector('.newsletter-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert(`Thank you for subscribing with email: ${email}\n\nYou will receive our weekly health newsletter with the latest medical news and health tips.`);
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
